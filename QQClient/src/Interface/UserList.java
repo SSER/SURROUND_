@@ -10,6 +10,7 @@ import Tools.ManageChat;
 
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class UserList extends JFrame implements ActionListener, MouseListener{
 	
@@ -74,7 +75,9 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		
 		label = new JLabel[50];
 		for (int i=0; i < label.length; i++) { // length is no a function!!!!!!!!!!!
-			label[i] = new JLabel(1+i+"", new ImageIcon("image/mm.jpg"), JLabel.LEFT);
+			int number = new Random().nextInt(12) + 1;
+			String path = "image/" + number +  ".png";
+			label[i] = new JLabel(1+i+"", new ImageIcon(path), JLabel.LEFT);
 			label[i].addMouseListener(this);
 			label[i].setEnabled(false);
 			if (label[i].getText().equals(ownerID) || enables[ i + 1 ] == 1) { // label can getText too!

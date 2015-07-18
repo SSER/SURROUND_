@@ -84,7 +84,7 @@ public class Interface extends JFrame implements ActionListener{
 		jp4 = new JPanel();
 		jp5 = new JPanel();
 		
-		labelpic = new JLabel(new ImageIcon("image/tou.gif"));
+		labelpic = new JLabel(new ImageIcon("image/tou.jpg"));
 		jp1.add(labelpic);
 		System.out.println(jp1.getBorder());
 		jp2.setLayout(new GridLayout(3,3));
