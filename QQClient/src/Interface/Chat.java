@@ -10,7 +10,7 @@ import java.net.*;
 import Common.*;
 import Pattern.*;
 import Tools.*;
-public class Chat extends JFrame implements ActionListener {
+public class Chat extends JFrame implements ActionListener{
 	
 	JPanel jp;
 	JTextArea texta = null;
@@ -52,10 +52,15 @@ public class Chat extends JFrame implements ActionListener {
 			m.setReceiver(tempFriendID);
 			m.setCon(textf.getText());
 			m.setSendTime(new Date().toString()); // remember this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//		System.out.println("chat is sending message。。。");
+	        m.setMsType("message_common_message");
+			//		System.out.println("chat is sending message。。。");
 			try {
-	//			Socket s = new Socket("127.0.0.1",8888);
+				//Socket s = new Socket("127.0.0.1",8888);
+				Connection c = new Connection();
+				
 				ObjectOutputStream oos = new ObjectOutputStream((ManageThread.getLinkServer(tempOwnerID)).getS().getOutputStream());
+				//ObjectOutputStream oos = new ObjectOutputStream(c.getConnection().getOutputStream());
+				textf.setText("");
 				// try to put this thing up  it means just one object
 				oos.writeObject(m);
 	//			Connection c = new Connection();
@@ -69,15 +74,20 @@ public class Chat extends JFrame implements ActionListener {
 		}
 	}
 	
-//	public void run() {
-//		while(true) {
-//			try {
-//				System.out.println("chat receiver thread start");
-//				ObjectInputStream ois = new ObjectInputStream(Connection.s.getInputStream());
-//				Message m = (Message)ois.readObject();
-//				this.texta.append(m.getSender()+" :   "+m.getCon()+"\r\n");
-//			}
-//			catch (Exception e) {/*System.out.println("chat receiver fail");*/}
-//		}
-//	}
+	/*public void run() {
+		while(true) {
+			try {
+				System.out.println("chat receiver thread start");
+				
+				Connection c = new Connection();
+				ObjectInputStream ois = new ObjectInputStream(c.getConnection().getInputStream());
+				Message m = (Message)ois.readObject();
+				this.texta.append(m.getSender()+" :   "+m.getCon()+"\r\n");
+			}
+			catch (Exception e) {/*System.out.println("chat receiver fail");}
+		}
+	}*/
+	public void AddMessage(Message m){
+		this.texta.append(m.getSender()+" :   "+m.getCon()+"\r\n");
+	}
 }

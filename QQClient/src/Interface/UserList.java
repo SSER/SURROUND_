@@ -81,23 +81,26 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		// TODO Auto-generated method stub
 		if (e.getClickCount() == 2) {
 			String friendNum = ((JLabel)e.getSource()).getText(); // getSource()!! return the component
-//			System.out.println("chat with"+friendNum);
+			System.out.println("chat with"+friendNum);
 			Chat c = new Chat(tempOwnerID, friendNum);
 			ManageChat.addChat(tempOwnerID+" "+friendNum, c);
-//			Thread t = new Thread(c);
-//			t.start();
+			
+			System.out.println("keyy is !: " + tempOwnerID + " " + friendNum);
+			//Thread t = new Thread(c);
+			//t.start();
 		}
 	}
 
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		((JLabel)e.getSource()).setForeground(Color.red);
-	//	j1.setForeground(Color.red);
+		JLabel J1 = ((JLabel)e.getSource());
+		J1.setForeground(Color.red);
 	}
 
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		((JLabel)e.getSource()).setForeground(Color.black);
+		JLabel J1 = ((JLabel)e.getSource());
+		J1.setForeground(Color.black);
 	}
 
 	public void mousePressed(MouseEvent arg0) {
