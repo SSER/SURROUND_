@@ -36,8 +36,23 @@ public class SqliteJBDC {
 			 c = DriverManager.getConnection("jdbc:sqlite:User.db");
 	         c.setAutoCommit(false);
 	         System.out.println("Opened database successfully");
+             
+	         
 	         
 	         stmt = c.createStatement();
+	         String QUERY = "SELECT * from User where USERNAME=\"%s\"";
+	         QUERY = String.format(QUERY, UserName);
+	         System.out.println(QUERY);
+	        //stmt.sta =stmt.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+	         ResultSet rs =  stmt.executeQuery(QUERY);
+	         
+	         if (rs.isAfterLast() == false){
+	        	 System.out.println("I'm out");
+	        	 return false;
+	         }
+	         
+	         rs.close();
+	         
 	         String INSERT = "INSERT INTO  User (USERNAME,PASSWORD) " +
 	                      "VALUES (%s, %s);";
 	         INSERT = String.format(INSERT, UserName, passWord);
@@ -50,6 +65,7 @@ public class SqliteJBDC {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			 Success = false;
 		}
         
     	return Success;
@@ -74,6 +90,7 @@ public class SqliteJBDC {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			 Success = false;
 		}
 
     	return Success;
