@@ -3,9 +3,13 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import Common.Message;
+import Common.User;
+import Pattern.Connection;
 import Tools.ManageChat;
 
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class UserList extends JFrame implements ActionListener, MouseListener{
 	
@@ -26,7 +30,7 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		tempOwnerID = ownerID;
 		
 		button1_1 = new JButton("friends");
-		button1_2 = new JButton("stranger");
+		button1_2 = new JButton("chart");
 		button1_2.addActionListener(this);
 		button1_2.setActionCommand("command1_2");
 		button1_3 = new JButton("blacklist");
@@ -44,12 +48,36 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		jp1_2 = new JPanel();
 		jp1_2.setLayout(new GridLayout(50,1));
 	
+		/*
+		 * 判断谁在线。
+		 */
+		User u = new User();
+		u.setId(ownerID);
+		String optype = "getOnline";
+		u.setType(optype);
+		System.out.println("HI i'm in Userlist 58");
+		ArrayList<Object> OnlineFriends = (new Connection().getOnlineFriend(u));
+		
+	    int enables[] = new int[1000];
+	    
+	    for (int i = 0; i < enables.length; ++i){
+	    	enables[ i ] = 0;
+	    }
+	    //获取收到的好友列表
+	    for (int i = 0; i < OnlineFriends.size(); ++i){
+	        int val = Integer.parseInt((String)(OnlineFriends.get(i)));
+	    	enables[val] = 1;
+	    	System.out.print("online member is " + val);
+	    }
+	    System.out.print("\n");
+	    
+		
 		label = new JLabel[50];
 		for (int i=0; i < label.length; i++) { // length is no a function!!!!!!!!!!!
 			label[i] = new JLabel(1+i+"", new ImageIcon("image/mm.jpg"), JLabel.LEFT);
 			label[i].addMouseListener(this);
 			label[i].setEnabled(false);
-			if (label[i].getText().equals(ownerID)) { // label can getText too!
+			if (label[i].getText().equals(ownerID) || enables[ i + 1 ] == 1) { // label can getText too!
 				label[i].setEnabled(true);
 			}
 			jp1_2.add(label[i]);
@@ -74,7 +102,10 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getActionCommand().equals("command1_2")){
+		    System.out.println("I'M in chartlist listener 106");
+			ChartList charts = new ChartList();	
+		}
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -112,5 +143,6 @@ public class UserList extends JFrame implements ActionListener, MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 }

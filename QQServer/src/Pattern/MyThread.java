@@ -17,6 +17,7 @@ public class MyThread extends Thread{
 		System.out.println("a new Server Thread start!");
 		while (true) {
 			try {
+				
 				ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 				Message m = (Message)ois.readObject();
 				System.out.println("I;m in MyThread 22");

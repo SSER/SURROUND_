@@ -6,4 +6,6 @@ public interface MessageType {
 	String message_common_message = "3";
 	String message_get_online_friend = "4";
 	String message_ret_online_friend = "5";
+	String message_rigester_success = "6";
+	String message_rigester_fail = "7";
 }

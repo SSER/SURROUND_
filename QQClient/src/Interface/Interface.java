@@ -144,6 +144,7 @@ public class Interface extends JFrame implements ActionListener{
 			Verify v = new Verify();
 			User u = new User();
 			u.setId(text1.getText());
+			System.out.println("In interface 147 id is :" + u.getId());
 			u.setKey(new String(text2.getPassword())); // remember this way!!!
 			u.setType("login");
 			// getPassword return char[]   it can't convert to String

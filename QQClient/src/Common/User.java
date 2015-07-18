@@ -4,6 +4,7 @@ public class User implements Serializable {
 	
 	private String id;
 	private String key;
+	private String optype;
 	
 	public String getId() {
 		return id;
@@ -16,5 +17,11 @@ public class User implements Serializable {
 	}
 	public void setKey(String key) {
 		this.key = key;
+	}
+	public void setType(String optype){
+		this.optype = optype;
+	}
+	public String getType(){
+		return this.optype;
 	}
 }

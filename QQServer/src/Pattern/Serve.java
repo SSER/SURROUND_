@@ -50,6 +50,17 @@ public class Serve {
 						 oos.writeObject(m);
 					 }
 				}
+				else if(type.equals("getOnline")) {
+					String onliners = new CheckOnline().checkOnlines();
+					System.out.println("in server 55 : " + onliners);
+					if (onliners.isEmpty()){
+						onliners = userName;
+					}
+					System.out.println("in server 55 : " + onliners);
+					m.setCon(onliners);
+					m.setMsType("5");
+					oos.writeObject(m);
+				}
 			}
 		}
 		catch (Exception e) {/*System.out.println("server thread receive fail 1");*/}

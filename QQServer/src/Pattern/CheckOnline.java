@@ -7,7 +7,10 @@ import Dbop.SqliteJBDC;
 import Common.*;
 
 public class CheckOnline {
-    public String checkOnline(Object u, SqliteJBDC jbdc){
+	/*
+	 * 从数据库查询，这个用于以后阶段的添加好友功能实现时需要使用到
+	 */
+    public String checkOnlines(Object u, SqliteJBDC jbdc){
     	String res = null;
     	User user = (User)u;
     	String Username = user.getId();
@@ -17,8 +20,8 @@ public class CheckOnline {
         	 while ( rs.next() ) {
               	  String id = rs.getString("username");
               	  String PassWord = rs.getString("password");
-              	  if (res.isEmpty()){
-              	      res += id;
+              	  if (res == null){
+              	      res = id;
               	  }
               	  else {
               		  res += (id + ",");
@@ -29,6 +32,16 @@ public class CheckOnline {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+         if (res == null){
+        	 res = "-1";
+         }
          return res;
+    }
+    public String checkOnlines(){
+    	String res = "";
+    	ThreadFlag Onlinelist = new ThreadFlag();
+    	res = Onlinelist.getOnlineUser();
+    	System.out.println("in CheckOnline 41 : " + res);
+    	return res;
     }
 }

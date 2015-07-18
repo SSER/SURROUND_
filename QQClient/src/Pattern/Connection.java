@@ -9,7 +9,7 @@ import Tools.*;
 
 public class Connection{
 	
-	public Socket s;
+	public  Socket s;
 	
 	public Connection(){
 
@@ -60,15 +60,16 @@ public class Connection{
 	public ArrayList<Object> getOnlineFriend(Object u){
 		ArrayList<Object> onlines = new ArrayList<Object>();
 		try {
-			//s = new Socket("127.0.0.1",8888);
+			s = new Socket("127.0.0.1",8888);
 			ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
 			oos.writeObject(u);
 			ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 			Message ms = (Message)ois.readObject();
 			String OnlineFriends = ms.getCon();
-			System.out.println("in client 39 : ");
-			String[] a = OnlineFriends.split(",");
+			System.out.println("in client 39 : " + OnlineFriends);
+			String[] a = OnlineFriends.split(" ");
 			
+			System.out.println("I'm a0"+ a[ 0 ]);
 			for (int i = 0; i < a.length; ++i){
 				onlines.add(a[ i ]);
 			}
@@ -81,7 +82,7 @@ public class Connection{
 	
 	public Socket getConnection(){
 		try {
-			//s = new Socket("127.0.0.1",8888);
+			s = new Socket("127.0.0.1",8888);
 		} catch (Exception e) {}
 		return s;
 	}
